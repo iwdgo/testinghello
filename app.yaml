@@ -1,0 +1,21 @@
+runtime: go
+env: flex
+
+resources:
+  cpu: 4
+
+automatic_scaling:
+  min_num_instances: 2
+  max_num_instances: 4
+
+skip_files:
+- ^\.git/.*$
+
+## but the defaults on gcloud are
+# env: flexible
+# threadsafe: true
+# automatic_scaling:
+#  min_num_instances: 2
+#  max_num_instances: 20
+#  cpu_utilization:
+#    target_utilization: 0.5
