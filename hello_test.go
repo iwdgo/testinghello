@@ -1,4 +1,4 @@
-package testinghello
+package main
 
 import (
 	"fmt"
@@ -99,6 +99,7 @@ func TestHelloHandler(t *testing.T) {
 		t.Fatalf("wrong body returned: got %s, want %s", got, want)
 	}
 }
+
 // Using httptest, url may not be empty
 func TestHelloHandler2(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", http.NoBody)
