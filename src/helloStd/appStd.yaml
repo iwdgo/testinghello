@@ -1,0 +1,10 @@
+# Standard Google App Engine (GAE)
+runtime: go
+api_version: go1
+
+# Even w/o No static handlers gets same error message.
+handlers:
+
+# w/o this filter handlers are not found
+- url: /.*
+  script: _go_app

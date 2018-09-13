@@ -1,12 +1,14 @@
 runtime: go
 env: flex
 
-resources:
-  cpu: 4
+# default is enough for local testing
+# resources:
+#   cpu: 4
 
-automatic_scaling:
-  min_num_instances: 2
-  max_num_instances: 4
+# automatic_scaling:
+# min default is 2
+# max default is 20
+# only one shows in admin server (:8000)
 
 skip_files:
 - ^\.git/.*$

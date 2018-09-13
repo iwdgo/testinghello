@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./common"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -8,6 +9,8 @@ import (
 	"net/http/httptest"
 	"testing"
 )
+
+var url = "http://" + common.Address
 
 // When the site is online
 func TestHelloOnlineNoClient(t *testing.T) {
@@ -23,7 +26,7 @@ func TestHelloOnlineNoClient(t *testing.T) {
 	}
 	if got, err := ioutil.ReadAll(r.Body); err != nil {
 		t.Fatal("reading body failed with ", err)
-	} else if want := "Hello, Gopher! Not using gcloud ?"; string(got) != want {
+	} else if want := common.Phrase; string(got) != want {
 		t.Fatalf("fail : got %q, want %q", got, want)
 	}
 }
@@ -47,7 +50,7 @@ func TestHelloOnlineClientGet(t *testing.T) {
 	}
 	if err != io.EOF {
 		t.Fatal("error reading body: ", err, "and read", b)
-	} else if want := "Hello, Gopher! Not using gcloud ?"; string(got[:b]) != want {
+	} else if want := common.Phrase; string(got[:b]) != want {
 		t.Fatalf("fail : got %q, want %q", got, want)
 	}
 }
@@ -73,7 +76,7 @@ func TestHelloOnlineClientDo(t *testing.T) {
 	}
 	if err != io.EOF {
 		t.Fatal("error reading body: ", err, "and read", b)
-	} else if want := phrase; string(got[:b]) != want {
+	} else if want := common.Phrase; string(got[:b]) != want {
 		t.Fatalf("fail : got %q, want %q", got, want)
 	}
 
@@ -88,14 +91,14 @@ func TestHelloHandler(t *testing.T) {
 	defer r.Body.Close()
 
 	w := httptest.NewRecorder() // to record the transaction
-	hello(w, r)
+	common.Hello(w, r)
 
 	if w.Code != 200 {
 		t.Fatalf("request failed with code: %d", w.Code)
 	}
 
 	got := w.Body.String()
-	if want := fmt.Sprintf(phrase); got != want {
+	if want := fmt.Sprintf(common.Phrase); got != want {
 		t.Fatalf("wrong body returned: got %s, want %s", got, want)
 	}
 }
@@ -106,14 +109,14 @@ func TestHelloHandler2(t *testing.T) {
 	defer r.Body.Close()
 
 	w := httptest.NewRecorder() // to record the transaction
-	hello(w, r)
+	common.Hello(w, r)
 
 	if w.Code != 200 {
 		t.Fatalf("request failed with code: %d", w.Code)
 	}
 
 	got := w.Body.String()
-	if want := fmt.Sprintf(phrase); got != want {
+	if want := fmt.Sprintf(common.Phrase); got != want {
 		t.Fatalf("wrong body returned: got %s, want %s", got, want)
 	}
 }
