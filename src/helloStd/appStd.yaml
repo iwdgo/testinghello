@@ -1,10 +1,16 @@
 # Standard Google App Engine (GAE)
+# Std does not require main() and runs all sources found starting with common
+# i.e. no need for anything
 runtime: go
 api_version: go1
 
 # Even w/o No static handlers gets same error message.
 handlers:
 
-# w/o this filter handlers are not found
+# w/o this filter handlers are not found, i.e. common.Hello registers automatically
 - url: /.*
   script: _go_app
+
+skip_files:
+- ^\.git/.*$
+# skipping files does not work to run in the same directory

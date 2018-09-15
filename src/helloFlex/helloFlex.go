@@ -1,11 +1,11 @@
 package main
 
-// Package is main as required by flexible usage of GAE
 import (
 	"fmt"
 	"google.golang.org/appengine"
 	"log"
 	"net/http"
+	"reflect"
 	"runtime"
 )
 
@@ -14,28 +14,31 @@ var (
 	Phrase  = "Hello, Gopher! Not using gcloud ?"
 )
 
-// If local, go run hello.go
-// You can test your gcloud sdk running dev_appserver.py appFlex.yaml
-//  or dev_appserver.py .\helloFlex\appFlex.yaml
-// Usage of init is required for dev_appserver.py
-func init() {
-	http.HandleFunc("/", hello)
-}
-
-// same handler in all packages
+// same handler in all packages but import ../common is not supported
 func hello(w http.ResponseWriter, r *http.Request) {
 	// log.Println("request on", r.RequestURI)
-	log.Println("running", runtime.Version())
+	// Not printing os version in testing log when running dev_appserver.py
+	if fmt.Sprintf("%s", reflect.TypeOf(w).String()) != "*internal.context" {
+		log.Println("running", runtime.Version())
+	}
 	fmt.Fprint(w, Phrase)
 }
 
-// Main is here as flex requires it
+// Main is here as flex complains otherwise.
+// You have to run Std without main as appengine.Main() fails in std mode
 func main() {
 	if appengine.IsDevAppServer() {
-		log.Println("running dev_appserver.py")
-		// Not working to start. Still fails during deployment
-		appengine.Main()
+		if appengine.InstanceID() == "0" { // fails on std
+			// running flex
+			log.Print("running local dev_appserver.py in flexible environment")
+			http.HandleFunc("/", hello)
+			appengine.Main()
+		} else {
+			// dev_appserver Std but currently unusable
+		}
 	} else {
+		// go run ./helloFlex/helloFlex.go
+		http.HandleFunc("/", hello)
 		http.ListenAndServe(Address, nil)
 	}
 }
