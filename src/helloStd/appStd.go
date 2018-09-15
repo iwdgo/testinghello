@@ -10,18 +10,18 @@ import (
 
 var (
 	Address = "localhost:8080"
-	Phrase  = "Hello, Gopher! Not using gcloud ?"
+	Phrase  = "Hello, Gopher! Also on gcloud ?"
 )
 
-/* init() is required as there is no main and appengine.Main() is not called */
+/* init() is required as there is no main and appengine.Main() cannot be called */
 func init() {
 	http.HandleFunc("/", Hello)
 }
 
-/* Hander name is exported for test purposes. Import like "../" are not supported by dev_appserver.py*/
+/* Hander name is exported for test purposes. Import like "../" is not supported by dev_appserver.py*/
 func Hello(w http.ResponseWriter, r *http.Request) {
 	// log.Println("request on", r.RequestURI)
-	// Not printing version during tests
+	// Not printing version during tests. Type varies with test method.
 	if wType := reflect.TypeOf(w).String(); wType != "*httptest.ResponseRecorder" &&
 		wType != "*http.response" {
 		log.Println("running", runtime.Version())

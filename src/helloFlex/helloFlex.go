@@ -14,7 +14,7 @@ var (
 	Phrase  = "Hello, Gopher! Not using gcloud ?"
 )
 
-// same handler in all packages but import ../common is not supported
+// same handler in all packages but import ../common is not supported by dev_appserver
 func hello(w http.ResponseWriter, r *http.Request) {
 	// log.Println("request on", r.RequestURI)
 	// Not printing os version in testing log when running dev_appserver.py
@@ -24,13 +24,13 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, Phrase)
 }
 
-// Main is here as flex complains otherwise.
-// You have to run Std without main as appengine.Main() fails in std mode
+// Main is here as deployment fails otherwise.
+// Std runs without main as appengine.Main() fails in std mode
 func main() {
 	if appengine.IsDevAppServer() {
 		if appengine.InstanceID() == "0" { // fails on std
 			// running flex
-			log.Print("running local dev_appserver.py in flexible environment")
+			log.Println("running local dev_appserver.py in flexible environment")
 			http.HandleFunc("/", hello)
 			appengine.Main()
 		} else {

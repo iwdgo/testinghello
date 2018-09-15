@@ -1,7 +1,8 @@
 package main
 
-// Unit test file reside in the directory of the code tested.
+// Unit test file resides in the directory of the tested code.
 import (
+	// "./helloFlex" is not supported as it is package main
 	"./helloStd"
 	"fmt"
 	"io"
@@ -12,6 +13,8 @@ import (
 )
 
 var url = "http://" + helloStd.Address
+
+const helloFlexPhrase = "Hello, Gopher! Not using gcloud ?"
 
 // When the site is online
 func TestHelloOnlineNoClient(t *testing.T) {
@@ -25,10 +28,11 @@ func TestHelloOnlineNoClient(t *testing.T) {
 	if r.StatusCode != 200 {
 		t.Fatal("hello returned error code", r.StatusCode)
 	}
+	// Cannot distinguish deploy method
 	if got, err := ioutil.ReadAll(r.Body); err != nil {
 		t.Fatal("reading body failed with ", err)
-	} else if want := helloStd.Phrase; string(got) != want {
-		t.Fatalf("fail : got %q, want %q", got, want)
+	} else if string(got) != helloStd.Phrase && string(got) != helloFlexPhrase {
+		t.Fatalf("fail : got %q, want %q", got, helloFlexPhrase+" or "+helloStd.Phrase)
 	}
 }
 
@@ -51,8 +55,8 @@ func TestHelloOnlineClientGet(t *testing.T) {
 	}
 	if err != io.EOF {
 		t.Fatal("error reading body: ", err, "and read", b)
-	} else if want := helloStd.Phrase; string(got[:b]) != want {
-		t.Fatalf("fail : got %q, want %q", got, want)
+	} else if string(got) != helloStd.Phrase && string(got) != helloFlexPhrase {
+		t.Fatalf("fail : got %q, want %q", got, helloFlexPhrase+" or "+helloStd.Phrase)
 	}
 }
 
@@ -77,10 +81,9 @@ func TestHelloOnlineClientDo(t *testing.T) {
 	}
 	if err != io.EOF {
 		t.Fatal("error reading body: ", err, "and read", b)
-	} else if want := helloStd.Phrase; string(got[:b]) != want {
-		t.Fatalf("fail : got %q, want %q", got, want)
+	} else if string(got) != helloStd.Phrase && string(got) != helloFlexPhrase {
+		t.Fatalf("fail : got %q, want %q", got, helloFlexPhrase+" or "+helloStd.Phrase)
 	}
-
 }
 
 // When the site is offline, handler is called directly
@@ -109,8 +112,8 @@ func TestHelloHandler2(t *testing.T) {
 	r := httptest.NewRequest("GET", "/", http.NoBody)
 	defer r.Body.Close()
 
-	w := httptest.NewRecorder() // to record the transaction
-	helloStd.Hello(w, r)
+	w := httptest.NewRecorder()
+	helloStd.Hello(w, r) // helloFlex test is identical
 
 	if w.Code != 200 {
 		t.Fatalf("request failed with code: %d", w.Code)

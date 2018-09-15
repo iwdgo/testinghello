@@ -12,17 +12,20 @@ To start the site locally, you can:
     `src>go run ./helloFlex/helloFlex.go`
 - use the standard set up (`appStd.yaml`)
     
-    `src/helloStd>dev_appserver.py appStd.yaml`
+    `src>dev_appserver.py ./helloStd/appStd.yaml`
 - use the flex set up (`appFlex.yaml`)
     
-    `src/helloFlex>dev_appserver.py appFlex.yaml`
+    `src>dev_appserver.py ./helloFlex/appFlex.yaml`
+- use the standard set up (`appStd.yaml`) to deploy on Google Cloud using free quotas
+    Set up of the account is first required.
+    `src/helloStd>gcloud app deploy appStd.yaml`
 
-Notice the change of default version depending on the method used.
+Default version of Go depends on the deploy method.
 The handler is the same as it only prints the chosen sentence.
-It cannot be imported from a common package as ../ is not supported by dev_appserver.
-Other differences in set up between Std and Flex deployment are commented.
+It cannot be imported from a package as ../ is not supported by dev_appserver.
+Other differences in set up between Std and Flex deployments are commented.
 
-The repo is using a recent gcloud SDK with default components installed:
+The repo requires a recent gcloud SDK with default components installed:
 
 ```
 | Cloud SDK Core Libraries               | core                     |   8.5 MiB |
