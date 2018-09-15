@@ -4,16 +4,18 @@ Test of hello app can be done offline (site is not running) or online.
 If online, it can be deployed locally in three different ways.
 
 Offline: by calling the handler directly
-
 Online: by issuing an http request and verifying the response.
 
 To start the site locally, you can:
-- run main() and ListenAndServe()
-src>go run ./helloFlex/helloFlex.go
-- use the standard set up (appStd.yaml)
-src/helloStd>dev_appserver.py appStd.yaml
-- use the flex set up (appFlex.yaml)
-src/helloFlex>dev_appserver.py appFlex.yaml
+- run main() and `ListenAndServe()`
+    
+    `src>go run ./helloFlex/helloFlex.go`
+- use the standard set up (`appStd.yaml`)
+    
+    `src/helloStd>dev_appserver.py appStd.yaml`
+- use the flex set up (`appFlex.yaml`)
+    
+    `src/helloFlex>dev_appserver.py appFlex.yaml`
 
 Notice the change of default version depending on the method used.
 The handler is the same as it only prints the chosen sentence.
