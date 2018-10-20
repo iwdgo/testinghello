@@ -10,7 +10,3 @@ handlers:
 # w/o this filter handlers are not found, i.e. common.Hello registers automatically
 - url: /.*
   script: _go_app
-
-skip_files:
-- ^\.git/.*$
-# skipping files does not work to run in the same directory

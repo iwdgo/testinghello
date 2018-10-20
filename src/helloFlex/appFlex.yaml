@@ -10,10 +10,6 @@ automatic_scaling:
    max_num_instances: 2
 # only one shows in admin server (:8000)
 
-skip_files:
-- ^\.git/.*$
-# - ^appStd.*$ # does not allow to place yaml in src/
-
 ## defaults on gcloud are
 # env: flexible
 # threadsafe: true
