@@ -22,8 +22,7 @@ func init() {
 func Hello(w http.ResponseWriter, r *http.Request) {
 	// log.Println("request on", r.RequestURI)
 	// Not printing version during tests. Type varies with test method.
-	if wType := reflect.TypeOf(w).String(); wType != "*httptest.ResponseRecorder" &&
-		wType != "*http.response" {
+	if wType := reflect.TypeOf(w).String(); wType != "*httptest.ResponseRecorder" {
 		log.Println("running", runtime.Version())
 	}
 	fmt.Fprint(w, Phrase)
