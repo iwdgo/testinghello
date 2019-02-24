@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	Phrase = "Hello, Gopher! Also on gcloud ? (w/o billing)"
+	Phrase = "Hello, Gopher! Also on Google Cloud ? (w/o billing)"
 )
 
 /* Hander name is exported for test purposes. Import like "../" is not supported by dev_appserver.py*/

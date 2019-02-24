@@ -1,2 +1,2 @@
 # Standard Google App Engine (GAE) i.e. no need for anything
-runtime: go111
+runtime: go
