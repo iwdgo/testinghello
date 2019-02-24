@@ -1,2 +1,4 @@
 # Standard Google App Engine (GAE) i.e. no need for anything
-runtime: go
+# runtime: go
+# returns "invalid api_version value"
+runtime: go111
