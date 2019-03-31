@@ -24,8 +24,8 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	*/
 	log.Println("running", runtime.Version())
 	fmt.Fprintln(w, Phrase)
-	fmt.Fprintln(w,os.Getenv("GAE_SERVICE"))
-	fmt.Fprintln(w,os.Getenv("GAE_INSTANCE"))
+	fmt.Fprintln(w, os.Getenv("GAE_SERVICE"))
+	fmt.Fprintln(w, os.Getenv("GAE_INSTANCE"))
 }
 
 func main() {
