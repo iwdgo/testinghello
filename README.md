@@ -1,4 +1,4 @@
-#Testing Hello!
+# Testing Hello!
 
 Test of hello app can be done offline (site is not running) or online.
 If online, it can be deployed locally in three different ways.
@@ -15,6 +15,7 @@ Since `Go 1.11` is available on GCP, the `app.yaml` is very simplified.
 #### Good to know:
 - Free resources are documented [here](https://cloud.google.com/free/docs/gcp-free-tier).
 - Although using Go modules, the set up is confusing as reported by the build log:
+
 `GOROOT=/usr/local/go/ GOPATH=/go GO111MODULE=on GOCACHE=/tmp/cache090267111 GOPATH=/go`
 - To set `GO111MODULE=off` in GCP requires more access than usual. 
 - On you own project, `go mod init` might fail. You can use `go mod init <module-path>` to get a valid go.mod.
