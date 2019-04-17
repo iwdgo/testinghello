@@ -18,9 +18,9 @@ Since `Go 1.11` is available on GCP, the `app.yaml` is very simplified.
 
 `GOROOT=/usr/local/go/ GOPATH=/go GO111MODULE=on GOCACHE=/tmp/cache090267111 GOPATH=/go`
 - To set `GO111MODULE=off` in GCP requires more access than usual. 
-- On you own project, `go mod init` might fail. You can use `go mod init <module-path>` to get a valid go.mod.
+- On you own project, `go mod init` might fail depending on your environment.
+You can use `go mod init <module-path>` to get a valid go.mod.
 [FAQ](https://github.com/golang/go/wiki/Modules#why-does-go-mod-init-give-the-error-cannot-determine-module-path-for-source-directory) of go modules programming reports this issue.
-- Go 1.12: When not using github as VCS, `go mod init` will [fail](https://github.com/golang/go/issues/27951).
 - After the creation of your project, no region is assigned. The first assignment is irreversible and must be
 in a free quota zone:
 ```helloGomod>gcloud app deploy .
