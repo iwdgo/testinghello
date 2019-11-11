@@ -1,18 +1,33 @@
 # Testing Hello!
 
-Test of hello app can be done offline (site is not running) or online.
-If online, it can be deployed locally in three different ways.
+Test of hello app can be done offline (server is not running) or online.
+If online, it can be deployed locally (no network) or on a server.
 
-Offline: by calling the handler directly.
+Test is executed:
+- offline: by calling the handler directly.
 
-Online: by issuing an http request and verifying the response of the web site.
+- online without network by issuing an http request and verifying the response of the web site.
+-- To start the site locally, use `src>go run .`
 
-### Modules
+- online with network (app is deployed) by issuing an http request and verifying the response of the web site.
+-- use the standard set up (`app.yaml`) to deploy on Google Cloud using free quotas
+    Set up of the account is required first.
+    `src>gcloud app deploy app.yaml`
 
+### Difference with v0.1.0
+
+All previous solutions have been remove including comments as their use on GCP is deprecated
+and would require ad hoc set up.
+
+Further, `dev_appserver.py` does not provide support beyond go1.11 and its use has been removed.
+To run the app locally `go run .` is available.
+
+#### v1.0.0 Optional use of modules in various configuration.
 Since `Go 1.11` is available on GCP, the `app.yaml` is very simplified.
     `src/main>gcloud app deploy .`
 
-#### Good to know:
+## Good to know
+
 - Free resources are documented [here](https://cloud.google.com/free/docs/gcp-free-tier).
 - Although using Go modules, the set up is confusing as reported by the build log:
 
@@ -48,40 +63,23 @@ in a free quota zone:
   [14] cancel
 ```
 
-### GOPATH mode
 
-To start the site locally, you can:
-- run main() and `ListenAndServe()`
-    
-    `src>go run ./helloFlex/helloFlex.go`
-- use the standard set up (`appStd.yaml`)
-    
-    `src>dev_appserver.py ./helloStd/appStd.yaml`
-- use the flex set up (`appFlex.yaml`)
-    
-    `src>dev_appserver.py ./helloFlex/appFlex.yaml`
-- use the standard set up (`appStd.yaml`) to deploy on Google Cloud using free quotas
-    Set up of the account is required first.
-    `src/helloStd>gcloud app deploy appStd.yaml`
-
-#### Good to know:
-- Default version of Go depends on the deploy method.
-- The handler is the same as it only prints the chosen sentence.
-- It cannot be imported from a package as ../ is not supported by dev_appserver.
-- Other differences in set up between Std and Flex deployments are commented.
-
-Check release notes for detail if you use a version before 1.11
-
-The repo requires a recent gcloud SDK with default components installed (latest versions is preferable) :
 
 ```
-go version go1.11.4 windows/amd64
-| Installed     | App Engine Go Extensions                             | app-engine-go            |  56.9 MiB |
-| Installed     | BigQuery Command Line Tool                           | bq                       |   < 1 MiB |
-| Installed     | Cloud Datastore Emulator                             | cloud-datastore-emulator |  17.7 MiB |
-| Installed     | Cloud SDK Core Libraries                             | core                     |   9.1 MiB |
-| Installed     | Cloud Storage Command Line Tool                      | gsutil                   |   3.5 MiB |
-| Installed     | Google Container Registry's Docker credential helper | docker-credential-gcr    |   1.8 MiB |
-| Installed     | gcloud app Python Extensions                         | app-engine-python        |   6.2 MiB |
-| Installed     | kubectl                                              | kubectl                  |   < 1 MiB |
+
+go version go1.13.3
+
+>gcloud components list
+
+Your current Cloud SDK version is: 268.0.0
+The latest available version is: 268.0.0
+
+| Installed     | App Engine Go Extensions                             | app-engine-go            |  4.8 MiB |
+| Installed     | BigQuery Command Line Tool                           | bq                       |  < 1 MiB |
+| Installed     | Cloud Datastore Emulator                             | cloud-datastore-emulator | 18.4 MiB |
+| Installed     | Cloud SDK Core Libraries                             | core                     | 12.1 MiB |
+| Installed     | Cloud Storage Command Line Tool                      | gsutil                   |  3.6 MiB |
+| Installed     | Google Container Registry's Docker credential helper | docker-credential-gcr    |  1.8 MiB |
+| Installed     | gcloud app Python Extensions                         | app-engine-python        |  6.0 MiB |
+| Installed     | kubectl                                              | kubectl                  |  < 1 MiB |
 ```
