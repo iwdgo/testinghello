@@ -1,0 +1,14 @@
+language: go
+
+go:
+  - 1.12.x
+  - tip
+
+before_install:
+  - go get -t -v ./...
+
+script:
+  - go test -race
+
+after_success:
+  ignore

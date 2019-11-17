@@ -1,3 +1,5 @@
+[![Go Report Card](https://goreportcard.com/badge/github.com/iwdgo/htmlutils)](https://goreportcard.com/report/github.com/iwdgo/htmlutils)
+
 # Testing Hello!
 
 Test of hello app can be done offline (server is not running) or online.
@@ -14,7 +16,7 @@ Test is executed:
     Set up of the account is required first.
     `src>gcloud app deploy app.yaml`
 
-### Difference with v0.1.0
+### Difference with v1.0.0
 
 All previous solutions have been remove including comments as their use on GCP is deprecated
 and would require ad hoc set up.
@@ -28,14 +30,13 @@ Since `Go 1.11` is available on GCP, the `app.yaml` is very simplified.
 
 ## Good to know
 
+- Coverage is below standard as the 4 startup lines of main() cannot be easily tested and are 50% of the code.
+The required complexities to test are outside the scope of this repository.
 - Free resources are documented [here](https://cloud.google.com/free/docs/gcp-free-tier).
 - Although using Go modules, the set up is confusing as reported by the build log:
-
 `GOROOT=/usr/local/go/ GOPATH=/go GO111MODULE=on GOCACHE=/tmp/cache090267111 GOPATH=/go`
 - To set `GO111MODULE=off` in GCP requires more access than usual. 
-- On you own project, `go mod init` might fail depending on your environment.
-You can use `go mod init <module-path>` to get a valid go.mod.
-[FAQ](https://github.com/golang/go/wiki/Modules#why-does-go-mod-init-give-the-error-cannot-determine-module-path-for-source-directory) of go modules programming reports this issue.
+- [FAQ](https://github.com/golang/go/wiki/Modules#why-does-go-mod-init-give-the-error-cannot-determine-module-path-for-source-directory) of go modules programming reports this issue.
 - After the creation of your project, no region is assigned. The first assignment is irreversible and must be
 in a free quota zone:
 ```helloGomod>gcloud app deploy .
