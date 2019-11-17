@@ -1,4 +1,5 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/iwdgo/htmlutils)](https://goreportcard.com/report/github.com/iwdgo/htmlutils)
+[![Build Status](https://travis-ci.com/iWdGo/testinghello.svg?branch=master)](https://travis-ci.com/iWdGo/testinghello)
 
 # Testing Hello!
 
