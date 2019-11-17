@@ -45,8 +45,8 @@ func getAppURL(s string) *url.URL {
 func TestHelloOnlineNoClient(t *testing.T) {
 	r, err := http.Get(getAppURL("").String())
 	if err != nil {
-		if strings.Contains(err.Error(), "No connection could be made") {
-			t.Skip("no connection")
+		if strings.Contains(err.Error(), "connection") {
+			t.Skip(err.Error())
 		}
 		t.Fatal(err)
 	}
@@ -67,8 +67,8 @@ func TestHelloOnlineNoClient(t *testing.T) {
 func TestHelloOnlineClientGet(t *testing.T) {
 	r, err := client.Get(getAppURL("").String())
 	if err != nil {
-		if strings.Contains(err.Error(), "No connection could be made") {
-			t.Skip("no connection")
+		if strings.Contains(err.Error(), "connection") {
+			t.Skip(err.Error())
 		}
 		t.Fatal(err)
 	}
@@ -93,8 +93,8 @@ func TestHelloOnlineClientGet(t *testing.T) {
 func TestHelloOnlineClientDo(t *testing.T) {
 	req, err := http.NewRequest("GET", getAppURL("").String(), http.NoBody)
 	if err != nil {
-		if strings.Contains(err.Error(), "No connection could be made") {
-			t.Skip("no connection")
+		if strings.Contains(err.Error(), "connection") {
+			t.Skip(err.Error())
 		}
 		t.Fatal(err)
 	}
