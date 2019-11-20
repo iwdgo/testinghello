@@ -1,7 +1,7 @@
 # appveyor.yml for Windows
 build: off
 
-clone_folder: c:\gopath\src\github.com\$username\$project
+clone_folder: c:\gopath\src\github.com\iwdgo\testinghello
 
 environment:
   GOPATH: c:\gopath
