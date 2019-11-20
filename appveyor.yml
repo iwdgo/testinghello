@@ -13,17 +13,3 @@ before_test:
 
 test_script:
   - go test ./...# appveyor.yml
-    build: off
-
-    clone_folder: c:\gopath\src\github.com\$username\$project
-
-    environment:
-      GOPATH: c:\gopath
-
-    stack: go 1.10
-
-    before_test:
-      - go vet ./...
-
-    test_script:
-      - go test ./...
