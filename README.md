@@ -1,6 +1,9 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/iwdgo/htmlutils)](https://goreportcard.com/report/github.com/iwdgo/htmlutils)
+
 [![Build Status](https://travis-ci.com/iWdGo/testinghello.svg?branch=master)](https://travis-ci.com/iWdGo/testinghello)
 [![Build Status](https://api.cirrus-ci.com/github/iWdGo/testinghello.svg)](https://cirrus-ci.com/github/iWdGo/testinghello)
+[![Build status](https://ci.appveyor.com/api/projects/status/r9m4u1ew6419ikbs?svg=true)](https://ci.appveyor.com/project/iWdGo/testinghello)
+![](https://github.com/actions/Go/workflows/build/badge.svg)
 
 # Testing Hello!
 
@@ -20,13 +23,13 @@ Test is executed:
 
 ### Difference with v1.0.0
 
-All previous solutions have been remove including comments as their use on GCP is deprecated
-and would require ad hoc set up.
+All previous solutions have been removed including comments as their use on GCP is deprecated
+Previous release is tagged but requires ad hoc set up.
 
-Further, `dev_appserver.py` does not provide support beyond go1.11 and its use has been removed.
-To run the app locally `go run .` is available.
+Further, `dev_appserver.py` does not provide support beyond go1.11 and its use is removed.
 
 #### v1.0.0 Optional use of modules in various configuration.
+
 Since `Go 1.11` is available on GCP, the `app.yaml` is very simplified.
     `src/main>gcloud app deploy .`
 
@@ -41,6 +44,7 @@ The required complexities to test are outside the scope of this repository.
 - [FAQ](https://github.com/golang/go/wiki/Modules#why-does-go-mod-init-give-the-error-cannot-determine-module-path-for-source-directory) of go modules programming reports this issue.
 - After the creation of your project, no region is assigned. The first assignment is irreversible and must be
 in a free quota zone:
+
 ```helloGomod>gcloud app deploy .
  You are creating an app for project [testinghello-in-the-cloud].
  WARNING: Creating an App Engine application for a project is irreversible and the region
@@ -67,6 +71,7 @@ in a free quota zone:
 ```
 
 
+Releases below are for illustration purposes. Using the latest releases is recommended.
 
 ```
 
