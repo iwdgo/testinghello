@@ -13,7 +13,7 @@ Test of hello app can be done offline (server is not running) or online.
 If online, it can be deployed locally (no network) or on a server.
 
 Test is executed:
-- offline: by calling the handler directly.
+- offline: by starting the server and calling the handler directly.
 
 - online without network by issuing an http request and verifying the response of the web site.
 -- To start the site locally, use `src>go run .`
