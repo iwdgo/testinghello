@@ -25,11 +25,15 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, os.Getenv("GAE_INSTANCE"))
 }
 
-func main() {
+func startServer() {
 	if p := os.Getenv("PORT"); p != "" {
 		port = p
 	}
 	log.Printf("Listening on port %s", port)
 	http.HandleFunc("/", hello)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+}
+
+func main() {
+	startServer()
 }
