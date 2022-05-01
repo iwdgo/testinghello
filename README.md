@@ -1,8 +1,10 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/iwdgo/htmlutils)](https://goreportcard.com/report/github.com/iwdgo/htmlutils)
+[![Go Reference](https://pkg.go.dev/badge/github.com/iwdgo/testinghello.svg)](https://pkg.go.dev/github.com/iwdgo/testinghello)
+[![Go Report Card](https://goreportcard.com/badge/github.com/iwdgo/testinghello)](https://goreportcard.com/report/github.com/iwdgo/testinghello)
+[![codecov](https://codecov.io/gh/iwdgo/testinghello/branch/master/graph/badge.svg)](https://codecov.io/gh/iwdgo/testinghello)
 
-[![Build Status](https://travis-ci.com/iWdGo/testinghello.svg?branch=master)](https://travis-ci.com/iWdGo/testinghello)
-[![Build Status](https://api.cirrus-ci.com/github/iWdGo/testinghello.svg)](https://cirrus-ci.com/github/iWdGo/testinghello)
-[![Build status](https://ci.appveyor.com/api/projects/status/r9m4u1ew6419ikbs?svg=true)](https://ci.appveyor.com/project/iWdGo/testinghello)
+[![Build Status](https://app.travis-ci.com/iwdgo/testinghello.svg?branch=master)](https://app.travis-ci.com/iwdgo/testinghello)
+[![Build Status](https://api.cirrus-ci.com/github/iwdgo/testinghello.svg)](https://cirrus-ci.com/github/iwdgo/testinghello)
+[![Build status](https://ci.appveyor.com/api/projects/status/r9m4u1ew6419ikbs?svg=true)](https://ci.appveyor.com/project/iwdgo/testinghello)
 ![Build status](https://github.com/iwdgo/testinghello/workflows/Go/badge.svg)
 
 # Testing Hello!
