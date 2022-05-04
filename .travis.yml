@@ -1,3 +1,5 @@
+os: windows
+
 language: go
 
 go:
@@ -8,7 +10,7 @@ before_install:
   - go vet ./...
 
 script:
-  - go test -race
+  - go test -race -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
