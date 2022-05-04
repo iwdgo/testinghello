@@ -8,21 +8,16 @@ import (
 )
 
 var (
-	phrase = "Hello, Gopher! Also on Google Cloud ? (w/o billing)"
-	port   = "8080"
+	port = "8080"
 )
 
+func phrase() string {
+	// TODO Phrase will differ from online and offline. Some configuration is useful
+	return fmt.Sprintf("Hello, Gopher! Are you online ?\n%s\n%s\n", os.Getenv("GAE_SERVICE"), os.Getenv("GAE_INSTANCE"))
+}
+
 func hello(w http.ResponseWriter, r *http.Request) {
-	// Not printing version during tests. Type varies with test method.
-	/*
-		if wType := reflect.TypeOf(w).String(); wType != "*httptest.ResponseRecorder" &&
-			wType != "*http.response" {
-			log.Println("running", runtime.Version())
-		}
-	*/
-	fmt.Fprintln(w, phrase)
-	fmt.Fprintln(w, os.Getenv("GAE_SERVICE"))
-	fmt.Fprintln(w, os.Getenv("GAE_INSTANCE"))
+	_, _ = fmt.Fprintln(w, phrase())
 }
 
 func startServer() {

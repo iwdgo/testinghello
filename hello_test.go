@@ -18,7 +18,7 @@ const connectError = "connection"
 var (
 	target     = "localhost"
 	client     = &http.Client{}
-	wantPhrase = phrase
+	wantPhrase = phrase()
 )
 
 func TestMain(m *testing.M) {
@@ -30,7 +30,6 @@ func TestMain(m *testing.M) {
 		go func() {
 			startServer()
 		}()
-		wantPhrase = phrase + "\n\n\n"
 	}
 	os.Exit(m.Run())
 }
