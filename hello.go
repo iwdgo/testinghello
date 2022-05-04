@@ -17,7 +17,7 @@ func phrase() string {
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	_, _ = fmt.Fprintln(w, phrase())
+	_, _ = fmt.Fprint(w, phrase())
 }
 
 func startServer() {
