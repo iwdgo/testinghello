@@ -12,17 +12,18 @@
 Test of hello app can be done offline (server is not running) or online.
 If online, it can be deployed locally (no network) or on a server.
 
-Test is executed:
-- offline: by starting the server and calling the handler directly.
+Tests are performed:
+- offline: by calling the handler directly. No server is started.  
+- online without network: by issuing an http request and verifying the response of the started website.
+- online with network (app is deployed): by issuing an http request and verifying the response of the deployed website.  
 
-- online without network by issuing an http request and verifying the response of the web site.
--- To start the site locally, use `src>go run .`
+Use as standalone module:
+- To start the site locally, use `src>go run .`
 
-- online with network (app is deployed) by issuing an http request and verifying the response of the web site.
--- use the standard set up (`app.yaml`) to deploy on Google Cloud which requires an account.
+- use the standard set up (`app.yaml`) to deploy on Google Cloud which requires to create an account.  
     `src>gcloud app deploy app.yaml`
 
-### v2.0.2
+### v1.1.0
 
 All previous solutions have been removed including comments as their use on GCP is deprecated
 Previous release is tagged but requires ad hoc set up.
@@ -32,13 +33,14 @@ Further, `dev_appserver.py` does not provide support beyond go 1.11 and its use 
 All information regarding Google Cloud are removed as default runtime is several cycles after Go 1.11.
 Repository is repurposed to test of a simple website.
 
-#### v1.0.0 Optional use of modules in various configuration.
+### v1.0.0 Optional use of modules in various configuration.
 
-Since `Go 1.11` is available on GCP, the `app.yaml` is very simplified.
-    `src/main>gcloud app deploy .`
+Since `go 1.11` is available on GCP, the `app.yaml` is elementary.
 
 ## Good to know
 
 Coverage is below standard as the 4 startup lines of main() cannot be easily tested and are 50% of the code.
 The required complexities to test are outside the scope of this repository.
 
+Tagging remains on v1 as the purpose of the repository is to follow the evolution of Google Cloud and go language 
+on its topic.
