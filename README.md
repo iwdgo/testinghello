@@ -22,17 +22,15 @@ Test is executed:
 -- use the standard set up (`app.yaml`) to deploy on Google Cloud which requires an account.
     `src>gcloud app deploy app.yaml`
 
-### v2.1.0
-
-All information regarding Google Cloud are removed as default runtime is several cycles after Go 1.11.
-Repository is repurposed to test of a simple website.
-
-### v2.0.0
+### v2.0.2
 
 All previous solutions have been removed including comments as their use on GCP is deprecated
 Previous release is tagged but requires ad hoc set up.
 
 Further, `dev_appserver.py` does not provide support beyond go 1.11 and its use is removed.
+
+All information regarding Google Cloud are removed as default runtime is several cycles after Go 1.11.
+Repository is repurposed to test of a simple website.
 
 #### v1.0.0 Optional use of modules in various configuration.
 
