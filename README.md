@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/iwdgo/testinghello/branch/master/graph/badge.svg)](https://codecov.io/gh/iwdgo/testinghello)
 
 [![Build Status](https://app.travis-ci.com/iwdgo/testinghello.svg?branch=master)](https://app.travis-ci.com/iwdgo/testinghello)
-[![Build Status](https://api.cirrus-ci.com/github/iwdgo/testinghello.svg)](https://api.cirrus-ci.com/github/iwdgo/testinghello)
+[![Build Status](https://api.cirrus-ci.com/github/iwdgo/testinghello.svg)](https://cirrus-ci.com/github/iwdgo/testinghello)
 [![Build status](https://ci.appveyor.com/api/projects/status/r9m4u1ew6419ikbs?svg=true)](https://ci.appveyor.com/project/iwdgo/testinghello)
 [![Go](https://github.com/iwdgo/testinghello/actions/workflows/go.yml/badge.svg)](https://github.com/iwdgo/testinghello/actions/workflows/go.yml)
 
