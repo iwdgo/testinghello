@@ -39,8 +39,7 @@ Since `go 1.11` is available on GCP, the `app.yaml` is elementary.
 
 ## Good to know
 
-Coverage is below standard as the 4 startup lines of main() cannot be easily tested and are 50% of the code.
-The required complexities to test are outside the scope of this repository.
+Coverage could be improved but the required complexity is beyond the scope of this repository.
 
 Tagging remains on v1 as the purpose of the repository is to follow the evolution of Google Cloud and go language 
 on its topic.
