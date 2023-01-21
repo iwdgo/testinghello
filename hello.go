@@ -6,15 +6,14 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
-var (
-	port = "8080"
-)
+var port = "8080"
 
 func phrase() string {
-	// TODO Phrase will differ from online and offline. Some configuration is useful
-	return fmt.Sprintf("Hello, Gopher! Are you online ?\n%s\n%s\n", os.Getenv("GAE_SERVICE"), os.Getenv("GAE_INSTANCE"))
+	return strings.TrimSpace(fmt.Sprintf("Hello, Gopher! Are you online ?\n%s\n%s\n",
+		os.Getenv("GAE_SERVICE"), os.Getenv("GAE_INSTANCE")))
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
