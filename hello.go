@@ -1,3 +1,4 @@
+// Package main starts an elementary server with one handler when invoked.
 package main
 
 import (
