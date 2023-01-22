@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"flag"
 	"fmt"
 	"io"
 	"net/http"
@@ -16,17 +17,19 @@ import (
 const connectError = "connection"
 
 var (
-	target     = "localhost"
+	target     *string
 	client     = &http.Client{}
 	wantPhrase = phrase()
 )
 
 func TestMain(m *testing.M) {
+	target = flag.String("target", "localhost", "Set url of deployed application")
+	flag.Parse()
 	// Override port default using PORT environment variable
 	if p := os.Getenv("PORT"); p != "" {
 		port = p
 	}
-	if target == "localhost" {
+	if *target == "localhost" {
 		go func() {
 			startServer()
 		}()
@@ -37,13 +40,14 @@ func TestMain(m *testing.M) {
 // getAppURL() returns a string containing the URL of the app as needed by http.
 // The parameter s is the path
 func getAppURL(s string) *url.URL {
-	return &url.URL{Scheme: "http", Host: fmt.Sprintf("%s:%s", target, port), Path: s}
+	return &url.URL{Scheme: "http", Host: fmt.Sprintf("%s:%s", *target, port), Path: s}
 }
 
 // When the site is online, various methods to execute the request:
 // - Using Get without client
 // - Using Get of the client
 // - Using Do of the client
+
 func TestHelloOnlineNoClient(t *testing.T) {
 	r, err := http.Get(getAppURL("").String())
 	if err != nil {

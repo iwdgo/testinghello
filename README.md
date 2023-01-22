@@ -35,6 +35,7 @@ on its topic.
 ### v1.2.0
 
 Minimal version is go 1.16 as deprecated `ioutil` package is migrated.
+Flag `target` allows to override deployed URL like `go test -target=<some-url>`
 
 ### v1.1.0
 
