@@ -6,18 +6,21 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"strings"
 )
 
 var port = "8080"
 
-func phrase() string {
-	return strings.TrimSpace(fmt.Sprintf("Hello, Gopher! Are you online ?\n%s\n%s\n",
-		os.Getenv("GAE_SERVICE"), os.Getenv("GAE_INSTANCE")))
+func phrase() []byte {
+	b := []byte("Hello, Gopher! Are you online ?")
+	// If deployed on Google Cloud, append some configuration variables
+	if s := os.Getenv("GAE_SERVICE"); s != "" {
+		b = append(b, fmt.Sprintf("\n%s\n%s", s, os.Getenv("GAE_INSTANCE"))...)
+	}
+	return b
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	_, _ = fmt.Fprint(w, phrase())
+	_, _ = fmt.Fprint(w, string(phrase()))
 }
 
 func startServer() {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"net/http"
@@ -36,8 +37,7 @@ func TestMain(m *testing.M) {
 // getAppURL() returns a string containing the URL of the app as needed by http.
 // The parameter s is the path
 func getAppURL(s string) *url.URL {
-	u := url.URL{Scheme: "http", Host: fmt.Sprintf("%s:%s", target, port), Path: s}
-	return &u
+	return &url.URL{Scheme: "http", Host: fmt.Sprintf("%s:%s", target, port), Path: s}
 }
 
 // When the site is online, various methods to execute the request:
@@ -68,7 +68,9 @@ func TestHelloOnlineNoClient(t *testing.T) {
 		t.Fatal("reading body failed:", err)
 	}
 
-	testPhrase(t, string(got))
+	if !bytes.Equal(got, wantPhrase) {
+		t.Fatalf("got %s, want %s", got, wantPhrase)
+	}
 }
 
 func TestHelloOnlineClientGet(t *testing.T) {
@@ -99,7 +101,9 @@ func TestHelloOnlineClientGet(t *testing.T) {
 		t.Fatalf("error reading body: %v and read %d", err, b)
 	}
 
-	testPhrase(t, string(got))
+	if !bytes.Equal(got, wantPhrase) {
+		t.Fatalf("got %s, want %s", got, wantPhrase)
+	}
 }
 
 func TestHelloOnlineClientDo(t *testing.T) {
@@ -135,7 +139,9 @@ func TestHelloOnlineClientDo(t *testing.T) {
 		t.Fatalf("error reading body: %v and read %d", err, b)
 	}
 
-	testPhrase(t, string(got))
+	if !bytes.Equal(got, wantPhrase) {
+		t.Fatalf("got %s, want %s", got, wantPhrase)
+	}
 }
 
 // When the site is offline, handler is called directly and request is built using httptest.
@@ -155,11 +161,7 @@ func TestHelloHandler(t *testing.T) {
 		t.Fatalf("request failed with code: %d", w.Code)
 	}
 
-	testPhrase(t, w.Body.String())
-}
-
-func testPhrase(t *testing.T, s string) {
-	if got := s; got != wantPhrase {
-		t.Fatalf("got %s, want %s", got, wantPhrase)
+	if got := w.Body.Bytes(); !bytes.Equal(got, wantPhrase) {
+		t.Fatalf("got %s, want %s", w.Body.String(), string(wantPhrase))
 	}
 }
