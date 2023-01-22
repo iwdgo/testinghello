@@ -23,6 +23,19 @@ Use as standalone module:
 - use the standard set up (`app.yaml`) to deploy on Google Cloud which requires to create an account.  
     `src>gcloud app deploy app.yaml`
 
+## Good to know
+
+Coverage could be improved but the required complexity is beyond the scope of this repository.
+
+Tagging remains on v1 as the purpose of the repository is to follow the evolution of Google Cloud and go language
+on its topic.
+
+## Release history
+
+### v1.2.0
+
+Minimal version is go 1.16 as deprecated `ioutil` package is migrated.
+
 ### v1.1.0
 
 All previous solutions have been removed including comments as their use on GCP is deprecated
@@ -37,9 +50,3 @@ Repository is repurposed to test of a simple website.
 
 Since `go 1.11` is available on GCP, the `app.yaml` is elementary.
 
-## Good to know
-
-Coverage could be improved but the required complexity is beyond the scope of this repository.
-
-Tagging remains on v1 as the purpose of the repository is to follow the evolution of Google Cloud and go language 
-on its topic.

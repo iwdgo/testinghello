@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -64,7 +63,7 @@ func TestHelloOnlineNoClient(t *testing.T) {
 		t.Fatal("request failed:", r.StatusCode)
 	}
 
-	got, err := ioutil.ReadAll(r.Body)
+	got, err := io.ReadAll(r.Body)
 	if err != nil {
 		t.Fatal("reading body failed:", err)
 	}
