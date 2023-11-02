@@ -5,16 +5,18 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
 	"os"
 	"strings"
 	"testing"
+	"time"
 )
 
-// When this word is found, the test is skipped as no connection was found with the server
-const connectError = "connection"
+// While starting, the server is actively refusing connection.
+const connectError = "connectex: No connection could be made because the target machine actively refused it."
 
 var (
 	target     *string
@@ -33,6 +35,19 @@ func TestMain(m *testing.M) {
 		go func() {
 			startServer()
 		}()
+		var err error
+		d := 100 * time.Millisecond
+		for {
+			_, err = http.Get(getAppURL("").String())
+			if err == nil {
+				break
+			}
+			if !strings.Contains(err.Error(), connectError) {
+				log.Fatalln(err)
+			}
+			log.Printf("waiting %s for %s:%s to start up\n", d, *target, port)
+			time.Sleep(d)
+		}
 	}
 	os.Exit(m.Run())
 }
@@ -51,9 +66,6 @@ func getAppURL(s string) *url.URL {
 func TestHelloOnlineNoClient(t *testing.T) {
 	r, err := http.Get(getAppURL("").String())
 	if err != nil {
-		if strings.Contains(err.Error(), connectError) {
-			t.Skip(err.Error())
-		}
 		t.Fatal(err)
 	}
 	defer func() {
@@ -80,9 +92,6 @@ func TestHelloOnlineNoClient(t *testing.T) {
 func TestHelloOnlineClientGet(t *testing.T) {
 	r, err := client.Get(getAppURL("").String())
 	if err != nil {
-		if strings.Contains(err.Error(), connectError) {
-			t.Skip(err.Error())
-		}
 		t.Fatal(err)
 	}
 	defer func() {
@@ -113,9 +122,6 @@ func TestHelloOnlineClientGet(t *testing.T) {
 func TestHelloOnlineClientDo(t *testing.T) {
 	req, err := http.NewRequest("GET", getAppURL("").String(), http.NoBody)
 	if err != nil {
-		if strings.Contains(err.Error(), connectError) {
-			t.Skip(err.Error())
-		}
 		t.Fatal(err)
 	}
 	defer func() {
